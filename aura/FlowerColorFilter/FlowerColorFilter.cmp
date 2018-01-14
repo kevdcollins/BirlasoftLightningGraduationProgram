@@ -1,0 +1,23 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+ controller="FlowerController" access="global">
+	<aura:attribute name="flowerColors" type="list" />
+	<aura:attribute name="selectedValue" type="string" />
+
+	<aura:registerEvent name="ColorChange" type="c:ColorChange"/>
+	<aura:registerEvent name="PriceRangeChange" type="c:PriceRangeChange"/>
+	<aura:registerEvent name="FlowerDetailReset" type="c:FlowerDetailReset"/>
+	<aura:registerEvent name="FlowerSearchReset" type="c:FlowerSearchReset"/>
+	<aura:registerEvent name="FlowerPriceRangeReset" type="c:FlowerPriceRangeReset"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:handler event="c:FlowerColorFilterReset" action="{!c.reset}"/>
+
+	<lightning:select name="flowerColorSelect" label="" aura:id="flowerColorSelect" 
+						value="{!v.selectedValue}" onchange="{!c.doColorChange}">
+		<option value="">Color Family</option>
+		<aura:iteration items="{!v.flowerColors}" var="color">
+			<option text="{!color}" value="{!color}"/>
+			<!--<option text="{!color}" value="{!color}" selected="{!item.selected}"/>-->
+		</aura:iteration>
+	</lightning:select>
+</aura:component>

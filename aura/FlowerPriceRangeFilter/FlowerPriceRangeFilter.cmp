@@ -1,0 +1,18 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+ controller="FlowerController"
+ access="global">
+	<aura:attribute name="price" default="0" type="Decimal"/>
+	<aura:attribute name="minimum" default="0" type="Decimal"/>
+	<aura:attribute name="maximum" default="100.00" type="Decimal"/>
+
+	<aura:registerEvent name="PriceRangeChange" type="c:PriceRangeChange"/>
+	<aura:registerEvent name="FlowerDetailReset" type="c:FlowerDetailReset"/>
+	<aura:registerEvent name="FlowerSearchReset" type="c:FlowerSearchReset"/>
+	<aura:registerEvent name="FlowerColorFilterReset" type="c:FlowerColorFilterReset"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:handler event="c:FlowerPriceRangeReset" action="{!c.reset}"/>
+	<!--<aura:handler event="c:FlowerPriceRange" action="{!c.setPriceRange}" />-->
+
+	<lightning:slider step=".5" min="{!v.minimum}" max="{!v.maximum}" value="{!v.price}" onchange="{! c.onRangeChange }"/>{!v.price}
+</aura:component>

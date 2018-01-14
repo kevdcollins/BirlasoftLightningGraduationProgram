@@ -1,0 +1,32 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+ controller="FlowerController" access="global">
+
+	<aura:attribute name="flower" type="Flower__c" />
+	<aura:attribute name="Id" type="Id" />
+
+	<aura:handler event="c:FlowerSelected" action="{!c.onFlowerSelected}"/>
+	<aura:handler event="c:FlowerDetailReset" action="{!c.reset}"/>
+
+    <force:recordData aura:id="service"
+      recordId="{!v.Id}"
+      fields="Id,
+			Name,
+			Description__c,
+			Price__c,
+			Quantity__c,
+			Color__c,
+			Image_Name__c"
+      targetFields="{!v.flower}"
+	  recordUpdated="{!c.onRecordUpdated}"
+	   />
+	<aura:if isTrue="{!not(empty(v.flower))}">
+		<br />
+		<h1 Style="font-weight:bold;">Flower Description:</h1>
+		<br />
+		<span>{!v.flower.Description__c}</span>
+		<br />
+		<br />
+		<span Style="font-weight:bold;">Quantity:&nbsp;{!v.flower.Quantity__c}</span>
+	</aura:if>
+
+</aura:component>

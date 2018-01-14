@@ -1,0 +1,37 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+ controller="FlowerController"
+ access="global">
+	<aura:attribute name="flowers" type="Flower__c[]" />
+	<aura:attribute name="flowersPagination" type="Flower__c[]" />
+    <aura:attribute type="Integer" name="pageNumber" default="1" />
+    <aura:attribute type="Integer" name="maxPage" default="1" />
+	<aura:registerEvent name="FlowerPriceRange" type="c:FlowerPriceRange"/>
+    <aura:handler name="change"  value="{!v.pageNumber}" action="{!c.renderPage}" />
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:handler event="c:SearchKeyChange" action="{!c.onSearchKeyChange}"/>
+	<aura:handler event="c:ColorChange" action="{!c.onColorChange}"/>
+	<aura:handler event="c:PriceRangeChange" action="{!c.onPriceRangeChange}"/>
+	<aura:handler name="FlowerSelect" event="c:FlowerSelect" action="{!c.onFlowerSelect}"  includeFacets="true" phase="capture"/>
+
+    <div id="easyPaginate" class="c-container">
+		<aura:if isTrue="{!not(empty(v.flowers))}">
+			<lightning:layout multipleRows="true" horizontalAlign="space">
+					<aura:iteration items="{!v.flowers}" var="flower">
+						<lightning:layoutItem flexibility="auto" padding="around-small" size="4">
+							<c:FlowerTile flower="{!flower}" selected="{!flower.Id == v.selectedFlowerId ? true : false }" />
+						</lightning:layoutItem>
+					</aura:iteration>
+			</lightning:layout>
+			<lightning:layout multipleRows="false" horizontalAlign="space">
+				<lightning:layoutItem flexibility="auto" padding="around-small">
+					<c:Pagination currentPageNumber="{!v.pageNumber}" maxPageNumber="{!v.maxPage}" />
+				</lightning:layoutItem>
+			</lightning:layout>
+			<aura:set attribute="else">
+				<div class="slds-align_absolute-center">
+					<h1>No flowers found</h1>
+				</div>
+			</aura:set>
+		</aura:if>
+    </div>
+</aura:component>

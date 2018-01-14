@@ -1,0 +1,27 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+ controller="FlowerController"
+ access="global">
+
+	<aura:attribute name="flower" type="Flower__c" />
+	<aura:attribute name="selected" type="boolean" default="false" />
+	<aura:registerEvent name="FlowerSelect" type="c:FlowerSelect"/>
+	<aura:registerEvent name="FlowerSelected" type="c:FlowerSelected"/>
+
+	<lightning:button aura:id="{!v.flower.Id}" name="{!v.flower.Name}" class="{!v.selected?'tile selected':'tile'}" 
+		onclick="{!c.onFlowerClick}" >
+		<div style="{! 'background-image:url(\'' + v.flower.Image_Url__c + '\'); '}" class="innertile">
+			<div class="lower-third">
+				<h1 class="slds-truncate">
+					Flower&nbsp;{!v.flower.Image_Name__c}:&nbsp;Price&nbsp;<ui:outputCurrency value="{!v.flower.Price__c}"/> 
+				</h1>
+			</div>
+
+		</div>
+	</lightning:button>
+	<!--<div Style="width:100%; border:0px solid black;">
+		<h1 Style="text-align:center; font-weight:bold;" class="">
+			Flower&nbsp;{!v.flower.Image_Name__c}:&nbsp;Price&nbsp;<ui:outputCurrency value="{!v.flower.Price__c}"/> 
+		</h1>
+	</div>-->
+
+</aura:component>

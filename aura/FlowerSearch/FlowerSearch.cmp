@@ -1,0 +1,12 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+	<aura:registerEvent name="SearchKeyChange" type="c:SearchKeyChange"/>
+	<aura:registerEvent name="FlowerDetailReset" type="c:FlowerDetailReset"/>
+	<aura:registerEvent name="FlowerPriceRangeReset" type="c:FlowerPriceRangeReset"/>
+	<aura:registerEvent name="FlowerColorFilterReset" type="c:FlowerColorFilterReset"/>
+
+	<aura:handler event="c:FlowerSearchReset" action="{!c.reset}"/>
+
+    <input id="flowerSearch" type="text" class="form-control" onkeyup="{!c.searchKeyChange}"
+            placeholder="Search"/>
+
+</aura:component>

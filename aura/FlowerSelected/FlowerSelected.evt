@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION">
+       <aura:attribute name="flower" type="Flower__c" />
+</aura:event>
